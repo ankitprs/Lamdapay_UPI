@@ -2,8 +2,8 @@
 
 Welcome! Seamlessly incorporate our advanced UPI (Unified Payments Interface) Payments SDK into your application. Our project offers an Android SDK, a server-side SDK (available as an NPM Module), and we're actively developing a web SDK. Get started now!
 
-![Maven Central](https://img.shields.io/maven-central/v/dev.shreyaspatil.EasyUpiPayment/EasyUpiPayment?label=mavenCentral)
-![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg)
+[![](https://jitpack.io/v/ankitprs/Lamdapay_UPI.svg)](https://jitpack.io/#ankitprs/Lamdapay_UPI)
+
 
 ## Flow
 ![Flow Image](./docs/images/lamdapay_flow.png)
@@ -19,71 +19,70 @@ Welcome! Seamlessly incorporate our advanced UPI (Unified Payments Interface) Pa
 ### 1.  Add Dependeny
 
 This library is included in mavenCentral.
-  ``` kotlin
-  repositories {
-      ...
-      mavenCentral()
-  }
-  ```
+``` kotlin
+repositories {
+    ...
+    mavenCentral()
+}
+```
 
-  ``` kotlin
-    dependencies {
-      // Lamdapay Library
-          implementation 'io.ankitprs.lamdapay:lamdapay:LATEST_VERSION_HERE'
-
-    }
-  ```
+``` kotlin
+dependencies {
+  // Lamdapay Library
+      implementation 'com.github.ankitprs:Lamdapay_UPI:LATEST_VERSION_HERE'
+}
+```
 
 ### 2. Initializing Lamdapay
    Initialized Lamdapay in to your main activity
 
-   ``` kotlin
-    val   lamdapayupi = PayUsingUpi(this) {
-          this.payeeVpa = "example@upi"
-          this.payeeName = "Ankit Prasas"
-          this.payeeMerchantCode = "12345"
-          this.transactionId = "T202009034345"
-          this.transactionRefId = "T202009034345"
-          this.description = "description"
-          this.amount = "1001.00"
-    }
-   ```
+``` kotlin
+val   lamdapayupi = PayUsingUpi(this) {
+    this.payeeVpa = "example@upi"
+    this.payeeName = "Ankit Prasas"
+    this.payeeMerchantCode = "12345"
+    this.transactionId = "T202009034345"
+    this.transactionRefId = "T202009034345"
+    this.description = "description"
+    this.amount = "1001.00"
+}
+```
 
   ### 3. Initiate Payment
 
-  ``` kotlin
-  lamdapayupi.startPayment()
-  ```
+``` kotlin
+lamdapayupi.startPayment()
+```
 
   ### 3. Transaction Status
 
   Add `PaymentStatusListener` To your main activity
 
-  ``` kotlin
-    override fun onTransactionCompleted(transactionDetails: TransactionDetails) {
-        Log.d("TransactionDetails", transactionDetails.toString())
-    }
+``` kotlin
+override fun onTransactionCompleted(transactionDetails: TransactionDetails) {
+    Log.d("TransactionDetails", transactionDetails.toString())
+}
 
-    override fun onTransactionCancelled() {
-        toast("Cancelled by user")
-    }
+override fun onTransactionCancelled() {
+    toast("Cancelled by user")
+}
 
-  ```
+```
   Set payment status listener
 
-  ``` kotlin
-    lamdapayupi.setPaymentStatusListener(this)
-  ```
-  
+``` kotlin
+lamdapayupi.setPaymentStatusListener(this)
+```
+
   Remove payment status listener
 
-  ``` kotlin
-    override fun onDestroy() {
-      super.onDestroy()
-        lamdapayupi.removePaymentStatusListener()
-    }
+``` kotlin
+override fun onDestroy() {
+  super.onDestroy()
+    lamdapayupi.removePaymentStatusListener()
+}
 
-  ```
+```
 
 | Kotlin (Field) | Description |
 | ----------- | ----------- |
