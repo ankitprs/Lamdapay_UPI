@@ -11,6 +11,5 @@ data class PaymentDataModel(
     var txnId: String,
     var txnRefId: String,
     var description: String,
-    var amount: String,
-    var defaultPackage: String?
+    var amount: String
 ) : Serializable

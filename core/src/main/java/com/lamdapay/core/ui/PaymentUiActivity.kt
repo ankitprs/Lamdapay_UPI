@@ -75,7 +75,7 @@ class PaymentUiActivity : ComponentActivity() {
         val appChooser = Intent.createChooser(paymentIntent, "Pay Using")
 
         if(paymentIntent.resolveActivity(packageManager)!= null){
-            startActivityForResult(appChooser, PAYMENT_REQUEST)
+            startActivityForResult(appChooser, PAYMENT_REQUEST, null)
         }else {
             Toast.makeText(this, "No UPI app found...!!!", Toast.LENGTH_SHORT).show()
             throwOnAppNotFound()
@@ -132,7 +132,7 @@ class PaymentUiActivity : ComponentActivity() {
     }
     internal fun throwOnAppNotFound() {
         Log.e(TAG, "No UPI app found on device.")
-        throw AppNotFoundException(payment.defaultPackage)
+        throw AppNotFoundException("not found")
     }
     internal fun callbackTransactionCancelled() {
         SingletonListener.listener?.onTransactionCancelled()

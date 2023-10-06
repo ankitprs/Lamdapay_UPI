@@ -1,18 +1,98 @@
-# Lamdapay - UPI Payments SDK (Open Source Project)
+# Lamdapay - UPI Payments Android SDK (FREE Payment)
 
-Lamdapay is an open-source project focused on developing an advanced UPI (Unified Payments Interface) Payments SDK. This SDK is designed to empower businesses and developers to seamlessly integrate UPI payment functionality into their applications. The project includes an Android SDK, a server-side SDK, and has future plans to introduce a web SDK.
+Welcome! Seamlessly incorporate our advanced UPI (Unified Payments Interface) Payments SDK into your application. Our project offers an Android SDK, a server-side SDK (available as an NPM Module), and we're actively developing a web SDK. Get started now!
 
-## Features
+![Maven Central](https://img.shields.io/maven-central/v/dev.shreyaspatil.EasyUpiPayment/EasyUpiPayment?label=mavenCentral)
+![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg)
 
-- **Android SDK**: The Android SDK enables developers to easily integrate UPI payment functionalities into their Android applications. It provides a comprehensive set of features, including transaction initiation, payment status tracking, and seamless integration with popular UPI payment apps.
+## Flow
+![Flow Image](./docs/images/lamdapay_flow.png)
 
-- **Server-side SDK**: The server-side SDK is a robust toolkit that allows businesses to handle UPI payment processing efficiently and securely. It supports essential functions such as generating payment links, verifying transaction statuses, and managing refunds. The server-side SDK streamlines payment workflows and enhances the overall user experience.
+## Demo Screenshots
 
-- **Future Plan: Web SDK**: The Lamdapay project has an exciting roadmap that includes the development of a web SDK. The upcoming web SDK will enable businesses to seamlessly integrate UPI payments into their web-based applications, expanding their customer base and offering payment convenience across platforms.
+![Screenshots]()
 
-## Objective
 
-One of the primary goals of Lamdapay is to reduce the transaction charges associated with UPI payments. By leveraging an open-source approach, Lamdapay aims to eliminate unnecessary intermediaries, enabling businesses and consumers to enjoy a lower transaction fee. The project is committed to reducing charges by up to 2%, making digital payments more affordable and accessible.
+## Getting Stated
+
+
+### 1.  Add Dependeny
+
+This library is included in mavenCentral.
+  ``` kotlin
+  repositories {
+      ...
+      mavenCentral()
+  }
+  ```
+
+  ``` kotlin
+    dependencies {
+      // Lamdapay Library
+          implementation 'io.ankitprs.lamdapay:lamdapay:LATEST_VERSION_HERE'
+
+    }
+  ```
+
+### 2. Initializing Lamdapay
+   Initialized Lamdapay in to your main activity
+
+   ``` kotlin
+    val   lamdapayupi = PayUsingUpi(this) {
+          this.payeeVpa = "example@upi"
+          this.payeeName = "Ankit Prasas"
+          this.payeeMerchantCode = "12345"
+          this.transactionId = "T202009034345"
+          this.transactionRefId = "T202009034345"
+          this.description = "description"
+          this.amount = "1001.00"
+    }
+   ```
+
+  ### 3. Initiate Payment
+
+  ``` kotlin
+  lamdapayupi.startPayment()
+  ```
+
+  ### 3. Transaction Status
+
+  Add `PaymentStatusListener` To your main activity
+
+  ``` kotlin
+    override fun onTransactionCompleted(transactionDetails: TransactionDetails) {
+        Log.d("TransactionDetails", transactionDetails.toString())
+    }
+
+    override fun onTransactionCancelled() {
+        toast("Cancelled by user")
+    }
+
+  ```
+  Set payment status listener
+
+  ``` kotlin
+    lamdapayupi.setPaymentStatusListener(this)
+  ```
+  
+  Remove payment status listener
+
+  ``` kotlin
+    override fun onDestroy() {
+      super.onDestroy()
+        lamdapayupi.removePaymentStatusListener()
+    }
+
+  ```
+
+| Kotlin (Field) | Description |
+| ----------- | ----------- |
+| transactionId      | Returns Transaction ID       |
+| responseCode   | Returns UPI Response Code        |
+| approvalRefNo   | Returns UPI Approval Reference Number (beneficiary)        |
+| transactionStatus   | Returns Status of transaction. (SUBMITTED/SUCCESS/FAILURE)        |
+| transactionRefId   | Returns Transaction reference ID passed in input        |
+| amount   | Returns Transaction amount        |
 
 ## How to Contribute
 
@@ -32,6 +112,10 @@ Lamdapay is released under the [MIT License](https://opensource.org/licenses/MIT
 
 ## Contact
 
-If you have any questions, suggestions, or feedback regarding the Lamdapay project, please feel free to reach out to us via email at [contact@lamdapay.com](mailto:ankitprasad.119@gmail.com). We value your input and appreciate your interest in contributing to the project.
+If you have any questions, suggestions, or feedback regarding the Lamdapay project, please feel free to reach out to us via email at [ankitpr2001@gmail.com](mailto:ankitpr2001@gmail.com). We value your input and appreciate your interest in contributing to the project.
 
 Thank you for your support and involvement in making Lamdapay a powerful and cost-effective UPI Payments SDK!
+
+# Reference
+
+ https://github.com/PatilShreyas/EasyUpiPayment-Android
